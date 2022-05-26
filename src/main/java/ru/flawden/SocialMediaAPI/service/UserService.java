@@ -28,4 +28,11 @@ public class UserService {
         return userDao.getUserList();
     }
 
+    public void deleteUser(Long id) {
+        userDao.deleteUser(id);
+    }
+
+    public void updateUser(User user) {
+        userDao.updateUser(user);
+    }
 }

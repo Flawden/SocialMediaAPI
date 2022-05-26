@@ -1,7 +1,6 @@
 package ru.flawden.SocialMediaAPI.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.flawden.SocialMediaAPI.entity.User;
 import ru.flawden.SocialMediaAPI.service.UserService;
 
@@ -18,8 +17,22 @@ public class UserController {
 
     @GetMapping("/users")
     public List<User> showAllUsers() {
-        userService.addUser(new User("Volodia"));
         return userService.getAllUser();
+    }
+
+    @PostMapping("/users")
+    public void addUser(@RequestBody User user) {
+        userService.addUser(user);
+    }
+
+    @PutMapping("/users")
+    public void updateUser(@RequestBody User user) {
+        userService.updateUser(user);
+    }
+
+    @DeleteMapping("/users")
+    public void deleteUser(Long id) {
+        userService.deleteUser(id);
     }
 
 }

@@ -31,4 +31,20 @@ public class UserDao {
         return userRepository.findAll();
     }
 
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    public void updateUser(User user) {
+        User userForUpdate = userRepository.findUserById(user.getId());
+
+        if (user.getUsername() != null) {
+            userForUpdate.setUsername(user.getUsername());
+        }
+        if (user.getPassword() != null) {
+            userForUpdate.setPassword(user.getPassword());
+        }
+
+        userRepository.save(userForUpdate);
+    }
 }
