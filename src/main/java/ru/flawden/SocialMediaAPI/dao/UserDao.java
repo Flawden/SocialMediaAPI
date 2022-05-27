@@ -2,6 +2,7 @@ package ru.flawden.SocialMediaAPI.dao;
 
 import org.springframework.stereotype.Component;
 import ru.flawden.SocialMediaAPI.entity.User;
+import ru.flawden.SocialMediaAPI.entity.UserDetail;
 import ru.flawden.SocialMediaAPI.repository.UserRepository;
 
 import java.util.List;
@@ -21,10 +22,16 @@ public class UserDao {
 //        if (userFromDb != null) {
 //            return false;
 //        }
-
+        userRepository.save(user);
+        User testUser = userRepository.findByUsername(user.getUsername());
+        user.setUserDetail(new UserDetail(testUser.getId(), "Egor", "Vladimirovi4"));
         userRepository.save(user);
 
         return true;
+    }
+
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
     public List<User> getUserList() {

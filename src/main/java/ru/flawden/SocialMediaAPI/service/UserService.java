@@ -1,5 +1,8 @@
 package ru.flawden.SocialMediaAPI.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.flawden.SocialMediaAPI.dao.UserDao;
 import ru.flawden.SocialMediaAPI.entity.User;
@@ -7,7 +10,7 @@ import ru.flawden.SocialMediaAPI.entity.User;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private UserDao userDao;
 
@@ -34,5 +37,10 @@ public class UserService {
 
     public void updateUser(User user) {
         userDao.updateUser(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userDao.getUserByUsername(username);
     }
 }

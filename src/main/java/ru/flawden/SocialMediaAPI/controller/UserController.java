@@ -20,7 +20,7 @@ public class UserController {
         return userService.getAllUser();
     }
 
-    @PostMapping("/users")
+    @PostMapping("/registration")
     public void addUser(@RequestBody User user) {
         userService.addUser(user);
     }
