@@ -37,8 +37,8 @@ public class UserController {
     }
 
     @GetMapping("/users_details")
-    public void getUserDetails(@RequestBody User user) {
-        userService.getUserDetails(user);
+    public UserDetail getUserDetails(@RequestParam Long id) {
+        return userService.getUserDetails(id);
     }
 
     @PostMapping("/users_details")

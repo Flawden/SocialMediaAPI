@@ -54,7 +54,7 @@ public class UserService implements UserDetailsService {
         userDao.addUserDeteail(id, userDetail);
     }
 
-    public UserDetail getUserDetails(User user) {
-        return userDao.getUserDetails(user);
+    public UserDetail getUserDetails(Long id) {
+        return userDao.getUserDetails(id);
     }
 }

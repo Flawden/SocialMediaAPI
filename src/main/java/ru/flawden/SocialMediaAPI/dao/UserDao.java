@@ -73,7 +73,7 @@ public class UserDao {
         userRepository.save(userForUpdate);
     }
 
-    public UserDetail getUserDetails(User user) {
-        return userDetailRepository.findByUser(user);
+    public UserDetail getUserDetails(Long id) {
+        return userDetailRepository.findUserDetailById(id);
     }
 }

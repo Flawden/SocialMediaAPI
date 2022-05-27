@@ -6,6 +6,6 @@ import ru.flawden.SocialMediaAPI.entity.UserDetail;
 
 public interface UserDetailRepository extends JpaRepository<UserDetail, Long> {
 
-    UserDetail findByUser(User user);
+    UserDetail findUserDetailById(Long id);
 
 }
