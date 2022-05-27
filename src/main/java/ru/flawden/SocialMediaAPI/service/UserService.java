@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ru.flawden.SocialMediaAPI.dao.UserDao;
 import ru.flawden.SocialMediaAPI.entity.User;
+import ru.flawden.SocialMediaAPI.entity.UserDetail;
 
 import java.util.List;
 
@@ -41,6 +42,19 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userDao.getUserByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException(String.format("Username %s not found", username));
+        }
         return userDao.getUserByUsername(username);
+
+    }
+
+    public void addUserDetails(UserDetail userDetail, Long id) {
+        userDao.addUserDeteail(id, userDetail);
+    }
+
+    public UserDetail getUserDetails(User user) {
+        return userDao.getUserDetails(user);
     }
 }

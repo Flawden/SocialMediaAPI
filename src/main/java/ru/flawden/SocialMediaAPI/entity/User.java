@@ -29,10 +29,9 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-    private UserDetail userDetail;
-
+//    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER,
+//            cascade = CascadeType.ALL)
+//    private UserDetail userDetail;
 
     public User(String username, String password) {
         this.username = username;

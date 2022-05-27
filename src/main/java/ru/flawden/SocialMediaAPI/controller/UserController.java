@@ -2,6 +2,7 @@ package ru.flawden.SocialMediaAPI.controller;
 
 import org.springframework.web.bind.annotation.*;
 import ru.flawden.SocialMediaAPI.entity.User;
+import ru.flawden.SocialMediaAPI.entity.UserDetail;
 import ru.flawden.SocialMediaAPI.service.UserService;
 
 import java.util.List;
@@ -33,6 +34,16 @@ public class UserController {
     @DeleteMapping("/users")
     public void deleteUser(Long id) {
         userService.deleteUser(id);
+    }
+
+    @GetMapping("/users_details")
+    public void getUserDetails(@RequestBody User user) {
+        userService.getUserDetails(user);
+    }
+
+    @PostMapping("/users_details")
+    public void addUser(@RequestBody UserDetail userDetail, @RequestParam Long id) {
+        userService.addUserDetails(userDetail, id);
     }
 
 }

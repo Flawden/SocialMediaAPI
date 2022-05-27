@@ -21,15 +21,15 @@ public class UserDetail {
     public UserDetail() {}
 
 
-    public UserDetail(User user, String firstname, String lastname) {
-        this.user = user;
+    public UserDetail(String firstname, String lastname) {
+//        this.user = user;
         this.firstname = firstname;
         this.lastname = lastname;
     }
 
-    public UserDetail(Long id, User user, String firstname, String lastname) {
+    public UserDetail(Long id, String firstname, String lastname) {
         this.id = id;
-        this.user = user;
+//        this.user = user;
         this.firstname = firstname;
         this.lastname = lastname;
     }

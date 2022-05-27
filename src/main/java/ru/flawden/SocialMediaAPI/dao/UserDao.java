@@ -4,6 +4,8 @@ import org.springframework.stereotype.Component;
 import ru.flawden.SocialMediaAPI.entity.Role;
 import ru.flawden.SocialMediaAPI.entity.User;
 import ru.flawden.SocialMediaAPI.entity.UserDetail;
+//import ru.flawden.SocialMediaAPI.repository.UserDetailRepository;
+import ru.flawden.SocialMediaAPI.repository.UserDetailRepository;
 import ru.flawden.SocialMediaAPI.repository.UserRepository;
 
 import java.util.Collections;
@@ -13,9 +15,11 @@ import java.util.List;
 public class UserDao {
 
     private UserRepository userRepository;
+    private UserDetailRepository userDetailRepository;
 
-    public UserDao(UserRepository userRepository) {
+    public UserDao(UserRepository userRepository, UserDetailRepository userDetailRepository) {
         this.userRepository = userRepository;
+        this.userDetailRepository = userDetailRepository;
     }
 
     public boolean addUser(User user) {
@@ -25,10 +29,21 @@ public class UserDao {
             return false;
         }
         user.setRoles(Collections.singleton(Role.USER));
-//        userRepository.save(user);
-//        User testUser = userRepository.findByUsername(user.getUsername());
-        user.setUserDetail(new UserDetail(user, "Egor", "Vladimirovi4"));
+//        user.setUserDetail(new UserDetail(user, "Egor", "Vladimirovi4"));
         userRepository.save(user);
+
+        return true;
+    }
+
+    public boolean addUserDeteail(Long id, UserDetail userDetail) {
+        User user = userRepository.findUserById(id);
+
+        if (user == null) {
+            return false;
+        }
+        userDetail.setUser(user);
+//        user.setUserDetail(userDetail);
+        userDetailRepository.save(userDetail);
 
         return true;
     }
@@ -56,5 +71,9 @@ public class UserDao {
         }
 
         userRepository.save(userForUpdate);
+    }
+
+    public UserDetail getUserDetails(User user) {
+        return userDetailRepository.findByUser(user);
     }
 }
