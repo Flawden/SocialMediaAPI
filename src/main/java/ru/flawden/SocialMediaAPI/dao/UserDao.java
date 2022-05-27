@@ -1,10 +1,12 @@
 package ru.flawden.SocialMediaAPI.dao;
 
 import org.springframework.stereotype.Component;
+import ru.flawden.SocialMediaAPI.entity.Role;
 import ru.flawden.SocialMediaAPI.entity.User;
 import ru.flawden.SocialMediaAPI.entity.UserDetail;
 import ru.flawden.SocialMediaAPI.repository.UserRepository;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -17,14 +19,15 @@ public class UserDao {
     }
 
     public boolean addUser(User user) {
-//        User userFromDb = userRepository.findByUsername(user.getUsername());
+        User userFromDb = userRepository.findByUsername(user.getUsername());
 
-//        if (userFromDb != null) {
-//            return false;
-//        }
-        userRepository.save(user);
-        User testUser = userRepository.findByUsername(user.getUsername());
-        user.setUserDetail(new UserDetail(testUser.getId(), "Egor", "Vladimirovi4"));
+        if (userFromDb != null) {
+            return false;
+        }
+        user.setRoles(Collections.singleton(Role.USER));
+//        userRepository.save(user);
+//        User testUser = userRepository.findByUsername(user.getUsername());
+        user.setUserDetail(new UserDetail(user, "Egor", "Vladimirovi4"));
         userRepository.save(user);
 
         return true;

@@ -21,9 +21,9 @@ public class UserService implements UserDetailsService {
     public void addUser(User user) {
         boolean isAdded = userDao.addUser(user);
         if (isAdded) {
-            System.out.println("Заебись");
+            System.out.println("Well done");
         } else {
-            System.out.println("Не заебись");
+            System.out.println("Fail");
         }
     }
 
