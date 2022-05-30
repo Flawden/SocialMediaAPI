@@ -1,8 +1,7 @@
 package ru.flawden.SocialMediaAPI.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import ru.flawden.SocialMediaAPI.MessageDTO;
+import ru.flawden.SocialMediaAPI.dto.MessageDTO;
 import ru.flawden.SocialMediaAPI.entity.Message;
 import ru.flawden.SocialMediaAPI.service.MessagesService;
 
@@ -24,13 +23,13 @@ public class MessagesController {
     }
 
     @GetMapping("/{id}")
-    public List<Message> getAllUsersFromUser(@PathVariable Long id) {
+    public List<Message> getAllMessagesFromUser(@PathVariable Long id) {
         return messagesService.getAllUsersFromUser(id);
     }
 
     @PostMapping
-    public void addMessage(@RequestBody MessageDTO message, @RequestParam Long id1, Long id2) {
-        messagesService.addMessage(message, id1, id2);
+    public void addMessage(@RequestBody MessageDTO message, @RequestParam Long author_id, Long reciever_id) {
+        messagesService.addMessage(message, author_id, reciever_id);
     }
 
 }

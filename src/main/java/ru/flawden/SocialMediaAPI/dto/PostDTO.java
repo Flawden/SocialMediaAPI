@@ -1,7 +1,6 @@
-package ru.flawden.SocialMediaAPI;
+package ru.flawden.SocialMediaAPI.dto;
 
-public class MessageDTO {
-
+public class PostDTO {
     private String text;
     private String tag;
 
@@ -20,5 +19,4 @@ public class MessageDTO {
     public void setTag(String tag) {
         this.tag = tag;
     }
-
 }

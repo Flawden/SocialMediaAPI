@@ -1,7 +1,7 @@
 package ru.flawden.SocialMediaAPI.service;
 
 import org.springframework.stereotype.Service;
-import ru.flawden.SocialMediaAPI.MessageDTO;
+import ru.flawden.SocialMediaAPI.dto.MessageDTO;
 import ru.flawden.SocialMediaAPI.entity.Message;
 import ru.flawden.SocialMediaAPI.entity.User;
 import ru.flawden.SocialMediaAPI.repository.MessageRepository;
@@ -23,11 +23,11 @@ public class MessagesService {
         return messageRepository.findAll();
     }
 
-    public void addMessage(MessageDTO message, Long id1, Long id2) {
-        User u1 = userRepository.findById(id1).orElseThrow(() -> new RuntimeException());
-        User u2 = userRepository.findById(id2).orElseThrow(() -> new RuntimeException());
+    public void addMessage(MessageDTO message, Long author_id, Long reciever_id) {
+        User author = userRepository.findById(author_id).orElseThrow(() -> new RuntimeException());
+        User recoever = userRepository.findById(reciever_id).orElseThrow(() -> new RuntimeException());
 
-        Message newMessage = new Message(message.getText(), message.getTag(), u1.getId(), u2.getId());
+        Message newMessage = new Message(message.getText(), message.getTag(), author.getId(), recoever.getId());
         messageRepository.save(newMessage);
     }
 

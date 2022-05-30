@@ -18,14 +18,6 @@ public class Post {
     private String tag;
     private Long author_id;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "author_id")
-//    private User author;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "reciever_id")
-//    private User reciever;
-
     public Post(Long id, String text, String tag, Long author_id) {
         this.id = id;
         this.text = text;
