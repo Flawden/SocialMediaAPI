@@ -2,48 +2,49 @@ package ru.flawden.SocialMediaAPI.controller;
 
 import org.springframework.web.bind.annotation.*;
 import ru.flawden.SocialMediaAPI.entity.User;
-import ru.flawden.SocialMediaAPI.entity.UserDetail;
+import ru.flawden.SocialMediaAPI.entity.UserInfo;
 import ru.flawden.SocialMediaAPI.service.UserService;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/v1/users")
 public class UserController {
 
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/users")
+    @GetMapping
     public List<User> showAllUsers() {
-        return userService.getAllUser();
+        return userService.getAllUsers();
     }
 
-    @PostMapping("/registration")
+    @PostMapping
     public void addUser(@RequestBody User user) {
         userService.addUser(user);
     }
 
-    @PutMapping("/users")
+    @PutMapping
     public void updateUser(@RequestBody User user) {
         userService.updateUser(user);
     }
 
-    @DeleteMapping("/users")
-    public void deleteUser(Long id) {
+    @DeleteMapping
+    public void deleteUser(@RequestParam Long id) {
         userService.deleteUser(id);
     }
 
-    @GetMapping("/users_details")
-    public UserDetail getUserDetails(@RequestParam Long id) {
+    @GetMapping("/users-details") //Разделять через тире
+    public UserInfo getUserDetails(@RequestParam Long id) {
         return userService.getUserDetails(id);
     }
 
-    @PostMapping("/users_details")
-    public void addUser(@RequestBody UserDetail userDetail, @RequestParam Long id) {
-        userService.addUserDetails(userDetail, id);
+    @PostMapping("/{id}/users-details")
+    public void addUser(@RequestBody UserInfo userInfo, @PathVariable Long id) {
+        userService.addUserDetails(userInfo, id);
     }
 
 }

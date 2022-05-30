@@ -5,31 +5,30 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name= "user_details")
+@Table(name= "user_info")
 @Data
-public class UserDetail {
+public class UserInfo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstname;
     private String lastname;
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+
+    @OneToOne(optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public UserDetail() {}
+    public UserInfo() {}
 
 
-    public UserDetail(String firstname, String lastname) {
-//        this.user = user;
+    public UserInfo(String firstname, String lastname) {
         this.firstname = firstname;
         this.lastname = lastname;
     }
 
-    public UserDetail(Long id, String firstname, String lastname) {
+    public UserInfo(Long id, String firstname, String lastname) {
         this.id = id;
-//        this.user = user;
         this.firstname = firstname;
         this.lastname = lastname;
     }
