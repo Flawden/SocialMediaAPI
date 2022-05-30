@@ -27,6 +27,11 @@ public class UserController {
         userService.addUser(user);
     }
 
+    @PostMapping("/add-subscriber")
+    public void addSubscriber(@RequestParam Long user_id, @RequestParam Long subscriber_id) {
+        userService.addSubscriber(user_id, subscriber_id);
+    }
+
     @PutMapping
     public void updateUser(@RequestBody User user) {
         userService.updateUser(user);

@@ -20,8 +20,9 @@ public class User  {
     private Long id;
 
     private String username;
-
     private String password;
+    @OneToMany
+    private List<User> subscribers;
 
     public User(String username, String password) {
         this.username = username;
@@ -33,6 +34,10 @@ public class User  {
         this.id = id;
         this.username = username;
         this.password = password;
+    }
+
+    public void addSubscriber(User user) {
+        subscribers.add(user);
     }
 
 }

@@ -57,4 +57,12 @@ public class UserService {
     public UserInfo getUserDetails(Long id) {
         return userDetailRepository.findUserDetailById(id);
     }
+
+    public void addSubscriber(Long user_id, Long subscriber_id) {
+        User user = userRepository.findById(user_id).orElseThrow(() -> new RuntimeException("User does not exist"));
+        User subscriber = userRepository.findById(subscriber_id).orElseThrow(() -> new RuntimeException("User does not exist"));
+
+        user.addSubscriber(subscriber);
+        userRepository.save(user);
+    }
 }
