@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
@@ -16,7 +17,13 @@ public class Post {
     private Long id;
     private String text;
     private String tag;
+    private Date departure_date;
     private Long author_id;
+
+    @PrePersist
+    private void created() {
+        departure_date = new Date();
+    }
 
     public Post(Long id, String text, String tag, Long author_id) {
         this.id = id;

@@ -5,6 +5,8 @@ import ru.flawden.SocialMediaAPI.entity.User;
 import ru.flawden.SocialMediaAPI.repository.MessageRepository;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 
 @Entity
@@ -18,16 +20,13 @@ public class Message {
     private Long id;
     private String text;
     private String tag;
+    private Date departure_date;
     private Long author_id;
     private Long reciever_id;
-
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "author_id")
-//    private User author;
-//
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "reciever_id")
-//    private User reciever;
+    @PrePersist
+    private void created() {
+        departure_date = new Date();
+    }
 
     public Message(Long id, String text, String tag, Long author_id, Long reciever_id) {
         this.id = id;
