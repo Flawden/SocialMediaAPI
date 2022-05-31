@@ -24,7 +24,12 @@ public class UserService {
     }
 
     public void addUser(User user) {
-        User userSaved = userRepository.save(user); //Сохраненный пользователь с айдишником
+        String pattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
+                "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        if (!user.getEmail().matches(pattern)) {
+            throw new RuntimeException("Illegal email");
+        }
+        userRepository.save(user); //Сохраненный пользователь с айдишником
     }
 
     public List<User> getAllUsers() {
@@ -38,8 +43,8 @@ public class UserService {
     public void updateUser(User user) {
         User userForUpdate = userRepository.findById(user.getId()).orElseThrow( () -> new RuntimeException("User not found"));
 
-        if (user.getUsername() != null) {
-            userForUpdate.setUsername(user.getUsername());
+        if (user.getEmail() != null) {
+            userForUpdate.setEmail(user.getEmail());
         }
         if (user.getPassword() != null) {
             userForUpdate.setPassword(user.getPassword());
@@ -51,6 +56,10 @@ public class UserService {
     public void addUserDetails(UserInfo userInfo, Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         userInfo.setUser(user);
+        String pattern = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$";
+        if (!userInfo.getPhoneNumber().matches(pattern)) {
+            throw new RuntimeException("Illegal phone number");
+        }
         userDetailRepository.save(userInfo);
     }
 
