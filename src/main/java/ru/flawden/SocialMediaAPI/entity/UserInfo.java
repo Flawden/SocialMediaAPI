@@ -21,10 +21,6 @@ public class UserInfo {
     private String phoneNumber;
     private LocalDate birthdate;
 
-    @OneToOne(optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
     public UserInfo() {}
 
 

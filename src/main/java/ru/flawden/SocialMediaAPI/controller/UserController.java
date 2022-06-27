@@ -42,7 +42,7 @@ public class UserController {
         userService.deleteUser(id);
     }
 
-    @GetMapping("/users-details") //Разделять через тире
+    @GetMapping("/users-details")
     public UserInfo getUserDetails(@RequestParam Long id) {
         return userService.getUserDetails(id);
     }
