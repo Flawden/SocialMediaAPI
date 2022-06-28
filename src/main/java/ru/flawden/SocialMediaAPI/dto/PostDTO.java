@@ -4,6 +4,16 @@ public class PostDTO {
     private String text;
     private String tag;
 
+    private String filename;
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
     public String getText() {
         return text;
     }

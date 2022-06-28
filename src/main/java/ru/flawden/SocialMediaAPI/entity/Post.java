@@ -17,6 +17,8 @@ public class Post {
     private Long id;
     private String text;
     private String tag;
+
+    private String fileName;
     private Date departure_date;
     private Long author_id;
 
@@ -36,5 +38,12 @@ public class Post {
         this.text = text;
         this.tag = tag;
         this.author_id = author_id;
+    }
+
+    public Post(String text, String tag, Long author_id, String fileName) {
+        this.text = text;
+        this.tag = tag;
+        this.author_id = author_id;
+        this.fileName = fileName;
     }
 }

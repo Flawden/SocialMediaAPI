@@ -16,7 +16,7 @@ public class ValidationUtil {
 
     public void validatePhoneNumber(String number) {
         String pattern = "^((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$";
-        if (number.matches(pattern)) {
+        if (!number.matches(pattern)) {
             throw new RuntimeException("Illegal phone number");
         }
     }

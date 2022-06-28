@@ -1,6 +1,7 @@
 package ru.flawden.SocialMediaAPI.controller;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.flawden.SocialMediaAPI.dto.PostDTO;
 import ru.flawden.SocialMediaAPI.entity.Post;
 import ru.flawden.SocialMediaAPI.service.PostService;
@@ -27,8 +28,13 @@ public class PostController {
         return postService.getAllPostsFromUser(user_id);
     }
 
+    @GetMapping("ebalabla")
+    public List<Post> getAllSubscribbersPost(@RequestParam Long user_id) {
+        return postService.getAllSubscribbersPost(user_id);
+    }
+
     @PostMapping
-    public void addPosts(@RequestBody PostDTO post, @RequestParam Long author_id) {
-        postService.addMessage(post, author_id);
+    public void addPosts(@RequestParam String tag,@RequestParam String text, @RequestParam Long author_id,  @RequestParam(name = "file", required = false) MultipartFile file) {
+        postService.addPosts(text, tag, author_id, file);
     }
 }

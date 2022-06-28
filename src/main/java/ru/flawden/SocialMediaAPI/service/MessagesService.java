@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.flawden.SocialMediaAPI.dto.MessageDTO;
 import ru.flawden.SocialMediaAPI.entity.Message;
 import ru.flawden.SocialMediaAPI.entity.User;
+import ru.flawden.SocialMediaAPI.exception.UserNotFoundException;
 import ru.flawden.SocialMediaAPI.repository.MessageRepository;
 import ru.flawden.SocialMediaAPI.repository.UserRepository;
 
@@ -24,10 +25,10 @@ public class MessagesService {
     }
 
     public void addMessage(MessageDTO message, Long author_id, Long reciever_id) {
-        User author = userRepository.findById(author_id).orElseThrow(() -> new RuntimeException());
-        User recoever = userRepository.findById(reciever_id).orElseThrow(() -> new RuntimeException());
+        User author = userRepository.findById(author_id).orElseThrow(() -> new UserNotFoundException("User does not exist"));
+        User reciever = userRepository.findById(reciever_id).orElseThrow(() -> new UserNotFoundException("User does not exist"));
 
-        Message newMessage = new Message(message.getText(), message.getTag(), author.getId(), recoever.getId());
+        Message newMessage = new Message(message.getText(), message.getTag(), author.getId(), reciever.getId());
         messageRepository.save(newMessage);
     }
 
